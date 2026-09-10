@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Nafis Burger — Menyu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --wood-1:#4a2f1c;
+    --wood-2:#2a180d;
+    --wood-3:#1b0f08;
+    --plank-line:rgba(0,0,0,.22);
+    --plank-hi:rgba(255,180,110,.05);
+    --paper:#f4ecd8;
+    --paper-line:#e2d6b8;
+    --chili:#d43a2a;
+    --chili-dark:#8c1f18;
+    --mustard:#e8a33c;
+    --basil:#5c7a52;
+    --cream-text:#f7f1e2;
+    --ink:#2a231c;
+    --gold-line:#8a6a3f;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;}
+  html,body{
+    background:
+      repeating-linear-gradient(180deg, var(--plank-hi) 0px, var(--plank-hi) 1px, transparent 1px, transparent 54px),
+      repeating-linear-gradient(180deg, transparent 0px, transparent 53px, var(--plank-line) 53px, var(--plank-line) 55px),
+      linear-gradient(160deg, var(--wood-1), var(--wood-2) 55%, var(--wood-3));
+    color:var(--cream-text);
+    font-family:'DM Sans',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--chili);color:var(--cream-text);}
+
+  /* ---------- HEADER ---------- */
+  header{
+    padding:20px 18px 16px;
+    background:
+      radial-gradient(circle at 15% 10%, rgba(232,163,60,0.16), transparent 42%),
+      radial-gradient(circle at 90% 0%, rgba(212,58,42,0.22), transparent 45%),
+      linear-gradient(160deg, rgba(20,12,7,.55), rgba(20,12,7,.2));
+    border-bottom:2px solid var(--gold-line);
+    box-shadow:0 6px 18px rgba(0,0,0,.35);
+    position:relative;
+    overflow:hidden;
+  }
+  .brand-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    position:relative;
+  }
+  .brand-lockup{display:flex;align-items:center;justify-content:center;gap:10px;}
+  .brand-lockup .hat{
+    font-size:clamp(24px,7vw,34px);
+    line-height:1;
+    filter:drop-shadow(0 2px 0 rgba(0,0,0,.5));
+  }
+  h1.brand{
+    font-family:'Anton',sans-serif;
+    font-weight:400;
+    font-size:clamp(42px,12vw,68px);
+    line-height:.9;
+    margin:0;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    text-align:center;
+    white-space:nowrap;
+    transform:scaleX(.96);
+  }
+  h1.brand .l1{
+    display:inline;
+    color:var(--paper);
+    text-shadow:2px 3px 0 rgba(0,0,0,.55);
+  }
+  h1.brand .l2{
+    display:inline;
+    color:var(--mustard);
+    text-shadow:2px 3px 0 var(--chili-dark);
+    margin-left:5px;
+  }
+  .social-badges{
+    position:absolute;
+    right:0;
+    top:0;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    align-items:flex-end;
+  }
+  .social-pill{
+    font-family:'Space Mono',monospace;
+    font-size:9.5px;
+    letter-spacing:.02em;
+    display:flex;
+    align-items:center;
+    gap:5px;
+    padding:4px 9px 4px 6px;
+    border-radius:999px;
+    border:1px solid #4a3d2c;
+    background:rgba(0,0,0,.35);
+    color:#d8cdb2;
+    white-space:nowrap;
+  }
+  .social-pill .dot{
+    width:15px;height:15px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:9px;
+    background:linear-gradient(135deg,var(--chili),var(--mustard));
+    color:#fff;
+  }
+  .tagline{
+    font-family:'Caveat',cursive;
+    font-weight:600;
+    color:var(--mustard);
+    font-size:clamp(18px,5vw,23px);
+    max-width:none;
+    margin:8px 0 0;
+    line-height:1.15;
+    text-align:center;
+    text-shadow:1px 1px 0 rgba(0,0,0,.4);
+  }
+
+  /* ---------- TABS ---------- */
+  nav.tabs{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:linear-gradient(180deg, var(--wood-3), rgba(27,15,8,.96));
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding:12px 18px;
+    border-bottom:2px solid var(--gold-line);
+    scrollbar-width:none;
+  }
+  nav.tabs::-webkit-scrollbar{display:none;}
+  .tab-btn{
+    flex:0 0 auto;
+    font-family:'Space Mono',monospace;
+    font-size:12px;
+    letter-spacing:.03em;
+    text-transform:uppercase;
+    padding:8px 14px;
+    border-radius:8px;
+    border:1px solid #5a4529;
+    background:rgba(255,255,255,.03);
+    color:#cfc3a8;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:background .2s,color .2s,border-color .2s,transform .15s;
+  }
+  .tab-btn.active{
+    background:var(--chili);
+    border-color:var(--chili);
+    color:#fff;
+    transform:translateY(-1px);
+    box-shadow:0 4px 10px rgba(212,58,42,.4);
+  }
+
+  /* ---------- SECTIONS / CAROUSEL ---------- */
+  main{padding:22px 0 120px;}
+  .section{display:none;}
+  .section.active{display:block;}
+  .section-head{
+    padding:0 20px 12px;
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+  }
+  .section-head h2{
+    font-family:'Anton',sans-serif;
+    font-weight:400;
+    text-transform:uppercase;
+    font-size:22px;
+    color:var(--mustard);
+    margin:0;
+  }
+  .section-head .count{
+    font-family:'Space Mono',monospace;
+    font-size:11px;
+    color:#8a7c60;
+  }
+  .carousel{
+    display:flex;
+    gap:14px;
+    overflow-x:auto;
+    padding:4px 20px 14px;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:none;
+  }
+  .carousel::-webkit-scrollbar{display:none;}
+  .dots{
+    display:flex;
+    gap:6px;
+    justify-content:center;
+    padding-top:2px;
+  }
+  .dots span{
+    width:5px;height:5px;border-radius:50%;
+    background:#453a2b;
+  }
+  .dots span.active{background:var(--mustard);width:16px;border-radius:3px;}
+
+  .card{
+    scroll-snap-align:start;
+    flex:0 0 78vw;
+    max-width:300px;
+    background:var(--paper);
+    color:var(--ink);
+    border-radius:16px;
+    padding:16px 16px 14px;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    border:1px solid #d8c79a;
+    box-shadow:0 10px 24px rgba(0,0,0,.4), inset 0 0 0 4px rgba(255,255,255,.35);
+  }
+  .card .imgwrap{
+    width:100%;
+    aspect-ratio:1/1;
+    border-radius:12px;
+    overflow:hidden;
+    background:#e8dcc0;
+    margin-bottom:12px;
+  }
+  .card .imgwrap img{width:100%;height:100%;object-fit:cover;display:block;}
+  .card .imgwrap.no-photo{
+    display:flex;align-items:center;justify-content:center;
+    background:
+      radial-gradient(circle at 20% 15%, rgba(232,163,60,.18), transparent 45%),
+      linear-gradient(160deg,#3a2416,#1b0f08);
+    color:#f4ecd8;
+    font-family:'Anton',sans-serif;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    font-size:22px;
+    text-align:center;
+    padding:16px;
+  }
+  .card h3{
+    font-family:'Anton',sans-serif;
+    font-weight:400;
+    text-transform:uppercase;
+    font-size:19px;
+    margin:0 0 4px;
+    letter-spacing:.2px;
+  }
+  .card .desc{
+    font-size:12.5px;
+    color:#6b5f4c;
+    margin-bottom:12px;
+    min-height:16px;
+  }
+  .size-row{
+    display:flex;
+    gap:6px;
+    margin-bottom:12px;
+    flex-wrap:wrap;
+  }
+  .size-btn{
+    flex:1 1 auto;
+    font-family:'Space Mono',monospace;
+    font-size:11px;
+    text-align:center;
+    padding:7px 6px;
+    border-radius:8px;
+    border:1.5px solid var(--paper-line);
+    background:#fbf6ea;
+    color:var(--ink);
+    cursor:pointer;
+  }
+  .size-btn span{display:block;font-size:10px;color:#8a7c60;margin-top:2px;}
+  .size-btn.active{
+    border-color:var(--chili);
+    background:var(--chili);
+    color:#fff;
+  }
+  .size-btn.active span{color:#f6d9d1;}
+  .card-footer{
+    margin-top:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+  }
+  .price{
+    font-family:'Space Mono',monospace;
+    font-weight:700;
+    font-size:15px;
+    background:var(--ink);
+    color:var(--paper);
+    padding:6px 10px;
+    border-radius:8px;
+    line-height:1.2;
+  }
+  .price small{font-weight:400;font-size:11px;color:#c9bfa8;}
+  .price:has(.old-price){
+    background:var(--chili);
+    color:#fff;
+    border-radius:40% 60% 55% 45% / 50% 45% 55% 50%;
+    transform:rotate(-3deg);
+    padding:7px 14px;
+    box-shadow:0 4px 10px rgba(140,31,24,.5);
+  }
+  .price .old-price{
+    display:block;
+    font-size:10.5px;
+    font-weight:400;
+    color:#f6d9d1;
+    text-decoration:line-through;
+    margin-bottom:1px;
+  }
+  .add-btn{
+    font-family:'Space Mono',monospace;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    background:var(--ink);
+    color:var(--paper);
+    border:none;
+    border-radius:10px;
+    padding:10px 14px;
+    cursor:pointer;
+    transition:transform .12s, background .15s;
+  }
+  .add-btn:active{transform:scale(.94);}
+  .add-btn.added{background:var(--basil);}
+
+  /* ---------- CART FAB ---------- */
+  .cart-fab{
+    position:static;
+    z-index:30;
+    margin:4px auto 12px;
+    background:var(--chili);
+    color:#fff;
+    border:none;
+    border-radius:999px;
+    padding:14px 22px;
+    font-family:'Space Mono',monospace;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    box-shadow:0 8px 22px rgba(200,64,44,.45);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    cursor:pointer;
+  }
+  .cart-fab .badge{
+    background:#fff;
+    color:var(--chili);
+    border-radius:50%;
+    width:20px;height:20px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:11px;font-weight:700;
+  }
+
+  /* ---------- CART DRAWER (receipt) ---------- */
+  .overlay{
+    position:fixed;inset:0;
+    background:rgba(10,8,6,.6);
+    opacity:0;pointer-events:none;
+    transition:opacity .25s;
+    z-index:40;
+  }
+  .overlay.open{opacity:1;pointer-events:auto;}
+  .drawer{
+    position:fixed;
+    left:0;right:0;bottom:0;
+    max-height:82vh;
+    background:var(--paper);
+    color:var(--ink);
+    border-radius:20px 20px 0 0;
+    transform:translateY(105%);
+    transition:transform .3s ease;
+    z-index:41;
+    display:flex;
+    flex-direction:column;
+    background-image:repeating-linear-gradient(#f4ecd8,#f4ecd8 27px,#e2d6b8 28px);
+  }
+  .drawer.open{transform:translateY(0);}
+  .drawer-handle{
+    width:40px;height:4px;background:#c9bc9c;border-radius:3px;
+    margin:10px auto 4px;
+  }
+  .receipt-head{
+    text-align:center;
+    padding:8px 20px 12px;
+    border-bottom:1px dashed #b7a97f;
+    font-family:'Space Mono',monospace;
+  }
+  .receipt-head .title{
+    font-family:'Anton',sans-serif;
+    font-size:22px;
+    text-transform:uppercase;
+  }
+  .receipt-head .sub{font-size:10.5px;color:#8a7c60;letter-spacing:.08em;}
+  .receipt-items{
+    overflow-y:auto;
+    padding:10px 22px;
+    flex:1;
+    font-family:'Space Mono',monospace;
+    font-size:13px;
+  }
+  .r-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:8px;
+    padding:9px 0;
+    border-bottom:1px dashed #cabf9b;
+  }
+  .r-item .name{flex:1;}
+  .r-item .name .tag{display:block;font-size:10.5px;color:#8a7c60;}
+  .r-item .qty-ctl{
+    display:flex;align-items:center;gap:6px;
+  }
+  .r-item .qty-ctl button{
+    width:22px;height:22px;border-radius:6px;border:1px solid #b7a97f;
+    background:#fbf6ea;cursor:pointer;font-family:'Space Mono',monospace;
+  }
+  .empty-msg{
+    text-align:center;padding:30px 10px;color:#8a7c60;font-size:13px;
+  }
+  .receipt-total{
+    border-top:1px dashed #b7a97f;
+    padding:14px 22px 18px;
+    font-family:'Space Mono',monospace;
+  }
+  .receipt-total .row{
+    display:flex;justify-content:space-between;font-size:13px;padding:3px 0;color:#6b5f4c;
+  }
+  .receipt-total .row.big{
+    font-size:19px;font-weight:700;color:var(--ink);padding-top:8px;
+  }
+  .checkout-btn{
+    width:100%;
+    margin-top:12px;
+    background:var(--chili);
+    color:#fff;
+    border:none;
+    border-radius:12px;
+    padding:14px;
+    font-family:'Space Mono',monospace;
+    text-transform:uppercase;
+    font-size:13px;
+    letter-spacing:.04em;
+    cursor:pointer;
+  }
+  .close-drawer{
+    position:absolute;
+    top:12px;right:16px;
+    background:none;border:none;
+    font-size:20px;color:#8a7c60;cursor:pointer;
+  }
+
+  footer.contact{
+    text-align:center;
+    padding:10px 20px 40px;
+  }
+  .contact-cursive{
+    font-family:'Caveat',cursive;
+    font-weight:700;
+    font-size:19px;
+    color:var(--mustard);
+    margin-bottom:12px;
+  }
+  .contact-bar{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:rgba(0,0,0,.35);
+    border:1px solid var(--gold-line);
+    border-radius:999px;
+    padding:9px 18px;
+    font-family:'Space Mono',monospace;
+    font-size:12px;
+    color:#e4d9bd;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .contact-bar .ico{
+    width:20px;height:20px;border-radius:50%;
+    background:var(--chili);
+    display:inline-flex;align-items:center;justify-content:center;
+    font-size:11px;color:#fff;
+  }
+  footer.contact a{color:#e4d9bd;text-decoration:none;}
+  .contact-socials{
+    margin-top:12px;
+    display:flex;
+    gap:8px;
+    justify-content:center;
+  }
+
+  @media (max-width:520px){
+    .social-badges{
+      position:static;
+      display:flex;
+      flex-direction:row;
+      justify-content:center;
+      margin-top:10px;
+    }
+    .brand-row{flex-direction:column;}
+    h1.brand{font-size:clamp(34px,10.5vw,58px);}
+    .brand-lockup .hat{font-size:24px;}
+    header{padding-top:18px;}
+  }
+
+  @media (min-width:640px){
+    .card{flex:0 0 260px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand-row">
+    <div class="brand-lockup">
+      <span class="hat">👨‍🍳</span>
+      <h1 class="brand"><span class="l1">Nafis</span><span class="l2">Burger</span></h1>
+    </div>
+    <div class="social-badges">
+      <span class="social-pill"><span class="dot">📷</span>nafis_burger</span>
+      <span class="social-pill"><span class="dot">✈️</span>Nafis_burgerr</span>
+    </div>
+  </div>
+  <p class="tagline">Mazali ta'm har doim siz bilan!</p>
+</header>
+
+<nav class="tabs" id="tabs"></nav>
+
+<main id="sections"></main>
+
+<div class="overlay" id="overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-handle"></div>
+  <button class="close-drawer" id="closeDrawer">✕</button>
+  <div class="receipt-head">
+    <div class="title">Chek</div>
+    <div class="sub">NAFIS BURGER · BUYURTMA VARAG'I</div>
+  </div>
+  <div class="receipt-items" id="receiptItems"></div>
+  <div class="receipt-total">
+    <div class="row"><span>Pozitsiyalar</span><span id="totalCount">0</span></div>
+    <div class="row big"><span>Jami</span><span id="totalSum">0 so'm</span></div>
+    <button class="checkout-btn" id="checkoutBtn">Buyurtmani rasmiylashtirish</button>
+  </div>
+</div>
+
+<footer class="contact">
+  <div class="contact-cursive">Doim mazali, doim tayyor!</div>
+  <button class="cart-fab" id="cartFab">
+    🧾 Buyurtma <span class="badge" id="cartBadge">0</span>
+  </button>
+  <div class="contact-bar">
+    <span class="ico">☎</span>
+    <a href="tel:+998998383012">+998 99 838 30 12</a>
+    <span style="color:#5a4529">|</span>
+    <a href="tel:+998946110403">+998 94 611 04 03</a>
+  </div>
+  <div class="contact-socials">
+    <span class="social-pill"><span class="dot">📷</span>nafis_burger</span>
+    <span class="social-pill"><span class="dot">✈️</span>Nafis_burgerr</span>
+  </div>
+</footer>
+
+<script>
+/* ---------------- DATA ---------------- */
+const CATEGORIES = [
+  {
+    id:'pizza', label:'Pitsa',
+    items:[
+      {name:'Peperoni', desc:'Klassik pepperoni pitsa', img:'menu-images/peperoni.jpg',
+        sizes:[{label:'Mini',price:60000},{label:'Obichniy',price:75000},{label:'Big',price:85000}]},
+      {name:'Qazi', desc:"Qazi go'shti bilan", img:'menu-images/pizza-qazi.jpg',
+        sizes:[{label:'Mini',price:70000},{label:'Obichniy',price:90000},{label:'Big',price:120000}]},
+      {name:"Go'shtli", desc:"Mol go'shti bilan", img:'menu-images/pizza-goshtli.jpg',
+        sizes:[{label:'Mini',price:70000},{label:'Obichniy',price:90000},{label:'Big',price:120000}]},
+      {name:'Americano', desc:"Amerikacha uslub", img:'menu-images/pizza-americano.jpg',
+        sizes:[{label:'Mini',price:70000},{label:'Obichniy',price:90000},{label:'Big',price:120000}]},
+      {name:'4 Мясо', desc:"To'rt xil go'sht", img:'menu-images/pizza-4myaso.jpg',
+        sizes:[{label:'Mini',price:70000},{label:'Obichniy',price:90000},{label:'Big',price:120000}]},
+    ]
+  },
+  {
+    id:'sets', label:'Setlar',
+    items:[
+      {name:'Nafis Set', desc:"2x Peperoni + 2x Fri (200gr) + 1x Kola (1L)", img:'menu-images/nafis-set.jpg',
+        price:100000, oldPrice:112000},
+      {name:"Do'stlar Set", desc:"2x Lavash + 2x Fri (200gr) + 1x Kola (1L)", img:'menu-images/dostlar-set.jpg',
+        price:100000, oldPrice:112000},
+      {name:'Chicken Set', desc:"2x Nagetsi (400gr) + 2x Fri (200gr) + 1x Kola (1L)", img:'menu-images/chicken-set.jpg',
+        price:90000, oldPrice:100000},
+      {name:'Oila Set', desc:"1x Peperoni + 2x Xot-dog + 2x Fri (200gr) + 1x Kola (1.5L)", img:'menu-images/oila-set.jpg',
+        price:150000, oldPrice:165000},
+    ]
+  },
+  {
+    id:'burgers', label:'Burgerlar',
+    items:[
+      {name:'Xaggi', desc:'', img:'menu-images/xaggi.jpg',
+        sizes:[{label:'Mini',price:30000},{label:'Big',price:35000}]},
+      {name:'Longer', desc:'', img:'menu-images/longer.jpg',
+        sizes:[{label:'Big',price:35000}]},
+      {name:'Danar', desc:'', img:'menu-images/danar.jpg',
+        sizes:[{label:'Mini',price:28000},{label:'Big',price:32000}]},
+      {name:'Shaurma', desc:'', img:'menu-images/shaurma.jpg',
+        sizes:[{label:'Mini',price:30000},{label:'Big',price:34000}]},
+      {name:'Gamburger', desc:'', img:'menu-images/gamburger.jpg',
+        sizes:[{label:'Mini',price:28000},{label:'Big',price:36000}]},
+      {name:'Chizburger', desc:'', img:'menu-images/chizburger.jpg',
+        sizes:[{label:'Mini',price:31000},{label:'Big',price:38000}]},
+      {name:'Chikenchiz', desc:'Tovuqli, pishloqli', img:'menu-images/chikenchiz.jpg',
+        sizes:[{label:'Mini',price:30000},{label:'Big',price:37000}]},
+      {name:'Chikengam', desc:"Tovuqli gamburger", img:'menu-images/chikengam.jpg',
+        sizes:[{label:'Mini',price:27000},{label:'Big',price:35000}]},
+    ]
+  },
+  {
+    id:'lavash', label:'Lavash & Xot-dog',
+    items:[
+      {name:'Lavash obichniy', desc:'', img:'menu-images/lavash-obichniy.jpg',
+        sizes:[{label:'Mini',price:28000},{label:'Obichniy',price:32000},{label:'Big',price:35000}]},
+      {name:'Lavash achchiq', desc:"Achchiq sous bilan", img:'menu-images/lavash-achchiq.jpg',
+        sizes:[{label:'Mini',price:30000},{label:'Obichniy',price:33000},{label:'Big',price:36000}]},
+      {name:'Lavash pishloqli', desc:'Pishloq bilan', img:'menu-images/lavash-pishloqli.jpg',
+        sizes:[{label:'Mini',price:32000},{label:'Obichniy',price:35000},{label:'Big',price:38000}]},
+      {name:'Tvister', desc:'', img:'menu-images/twister.jpg',
+        sizes:[{label:'Big',price:35000}]},
+      {name:'Tandir lavash', desc:'', img:'menu-images/tandir-lavash.jpg',
+        sizes:[{label:'Big',price:40000}]},
+      {name:'Longer', desc:'', img:'menu-images/longer.jpg',
+        price:35000},
+      {name:'Nonli xot-dog', desc:'', img:'menu-images/nonli-hot-dog.jpg',
+        price:25000},
+      {name:'Shashlik xot-dog', desc:'', img:'menu-images/shashlik-hot-dog.jpg',
+        price:35000},
+      {name:'Qazi xot-dog', desc:'', img:'menu-images/qazi-hot-dog.jpg',
+        sizes:[{label:'Mini',price:25000},{label:'Big',price:35000}]},
+      {name:'Korolevskiy xot-dog', desc:'', img:'menu-images/korolevskiy.jpg',
+        sizes:[{label:'Mini',price:25000},{label:'Big',price:35000}]},
+      {name:'Xot-dog', desc:'', img:'menu-images/hot-dog.jpg',
+        sizes:[{label:'Mini',price:17000},{label:'Big',price:22000}]},
+      {name:'Gril tovuq', desc:"Vazniga qarab: 40 000 dan — 75 000 gacha", img:'menu-images/grill.jpg',
+        price:40000},
+      {name:'Donar taom', desc:'', img:'menu-images/donar-taom.jpg',
+        price:45000},
+    ]
+  },
+  {
+    id:'sides', label:'Gazaklar',
+    items:[
+      {name:'Klab sendvich (mol go\'shti)', desc:"Mol go'shti bilan", img:'menu-images/klab-sendvich.jpg', price:37000},
+      {name:'Klab sendvich (tovuq)', desc:'Tovuq bilan', img:'menu-images/klab-sendvich.jpg', price:37000},
+      {name:'Fri', desc:'100gr', img:'menu-images/fri-100.jpg', price:15000},
+      {name:'Fri derevenskiy', desc:'150gr', img:'menu-images/fri-derevenskiy.jpg', price:20000},
+      {name:'Nagetsi', desc:'150gr', img:'menu-images/nagetsi.jpg', price:22000},
+      {name:'Chuchvara', desc:'', img:'menu-images/chuchvara.jpg', price:25000},
+    ]
+  },
+  {
+    id:'breakfast', label:'Nonushta',
+    items:[
+      {name:'Sosiska qovurilgan', desc:'', img:'menu-images/sosiska-qovurilgan.jpg', price:5000},
+      {name:'Tuxum qovurilgan', desc:'', img:'menu-images/tuxum-qovurilgan.jpg', price:5000},
+      {name:'Qahva', desc:'', img:'menu-images/kofe.jpg', price:5000},
+      {name:'Choy (finjon)', desc:'', img:'menu-images/choy-finjon.jpg', price:3000},
+      {name:'Limon choy', desc:'', img:'menu-images/limon-choy.jpg', price:5000},
+      {name:'Choy oddiy (choynak)', desc:'', img:'menu-images/choy-oddiy.jpg', price:5000},
+      {name:'Limon choynak', desc:'', img:'menu-images/limon-choynak.jpg', price:10000},
+    ]
+  },
+  {
+    id:'moxito', label:'Moxito',
+    items:[
+      {name:'Moxito Klassik', desc:'Yalpiz, laym', img:'menu-images/moxito-klassik.jpg', price:20000},
+      {name:'Moxito Qulupnay', desc:'Qulupnay bilan', img:'menu-images/moxito-qulupnay.jpg', price:20000},
+      {name:'Moxito Mango', desc:'Mango bilan', img:'menu-images/moxito-mango.jpg', price:20000},
+      {name:'Moxito Blueberry', desc:"Ko'k mevalar bilan", img:'menu-images/moxito-blueberry.jpg', price:20000},
+      {name:'Moxito Tropik', desc:"Tropik mevalar bilan", img:'menu-images/moxito-tropik.jpg', price:20000},
+    ]
+  },
+  {
+    id:'drinks', label:'Ichimliklar',
+    items:[
+      {name:'Coca-Cola', desc:'', img:'menu-images/coca-cola.jpg',
+        sizes:[{label:'0.25L',price:5000},{label:'0.5L',price:8000},{label:'1.0L',price:12000},{label:'1.5L',price:16000},{label:'2.0L',price:20000}]},
+      {name:'Pepsi', desc:'', img:'',
+        sizes:[{label:'0.25L',price:5000},{label:'0.5L',price:8000},{label:'1.0L',price:12000},{label:'1.5L',price:16000},{label:'2.0L',price:20000}]},
+      {name:'Fanta', desc:'', img:'',
+        sizes:[{label:'0.25L',price:5000},{label:'0.5L',price:8000},{label:'1.0L',price:12000},{label:'1.5L',price:16000},{label:'2.0L',price:20000}]},
+      {name:'Lipton', desc:'', img:'',
+        sizes:[{label:'0.5L',price:8000},{label:'1.0L',price:12000},{label:'1.5L',price:16000}]},
+      {name:'Fuse Tea', desc:'', img:'',
+        sizes:[{label:'0.5L',price:8000},{label:'1.0L',price:12000},{label:'1.5L',price:16000}]},
+      {name:'Sok', desc:"Tabiiy sharbat", img:'',
+        sizes:[{label:'0.22L',price:5000},{label:'1.0L',price:15000}]},
+      {name:'Adrenalin', desc:'Energetik ichimlik', img:'',
+        price:19000},
+      {name:'Flash', desc:'Energetik ichimlik', img:'',
+        sizes:[{label:'0.25L',price:10000},{label:'0.33L',price:11000},{label:'0.45L',price:12000}]},
+    ]
+  },
+];
+
+/* ---------------- STATE ---------------- */
+let cart = {}; // key -> {name,size,price,qty}
+function fmt(n){ return n.toLocaleString('ru-RU') + " so'm"; }
+function keyFor(itemName,sizeLabel){ return itemName+'::'+(sizeLabel||''); }
+
+/* ---------------- RENDER TABS + SECTIONS ---------------- */
+const tabsEl = document.getElementById('tabs');
+const sectionsEl = document.getElementById('sections');
+
+CATEGORIES.forEach((cat,i)=>{
+  const btn = document.createElement('button');
+  btn.className = 'tab-btn' + (i===0?' active':'');
+  btn.textContent = cat.label;
+  btn.onclick = ()=> selectTab(cat.id);
+  btn.dataset.cat = cat.id;
+  tabsEl.appendChild(btn);
+
+  const section = document.createElement('section');
+  section.className = 'section' + (i===0?' active':'');
+  section.id = 'sec-'+cat.id;
+
+  const head = document.createElement('div');
+  head.className='section-head';
+  head.innerHTML = `<h2>${cat.label}</h2><span class="count">${cat.items.length} ta taom</span>`;
+  section.appendChild(head);
+
+  const carousel = document.createElement('div');
+  carousel.className='carousel';
+  carousel.id = 'car-'+cat.id;
+
+  cat.items.forEach((item,idx)=>{
+    carousel.appendChild(buildCard(item, cat.id+'-'+idx));
+  });
+  section.appendChild(carousel);
+
+  const dots = document.createElement('div');
+  dots.className='dots';
+  dots.id = 'dots-'+cat.id;
+  cat.items.forEach((_,idx)=>{
+    const d = document.createElement('span');
+    if(idx===0) d.className='active';
+    dots.appendChild(d);
+  });
+  section.appendChild(dots);
+
+  sectionsEl.appendChild(section);
+
+  carousel.addEventListener('scroll', ()=>{
+    const cardW = carousel.firstElementChild.getBoundingClientRect().width + 14;
+    const idx = Math.round(carousel.scrollLeft / cardW);
+    [...dots.children].forEach((d,i)=> d.classList.toggle('active', i===idx));
+  }, {passive:true});
+});
+
+function selectTab(id){
+  document.querySelectorAll('.tab-btn').forEach(b=> b.classList.toggle('active', b.dataset.cat===id));
+  document.querySelectorAll('.section').forEach(s=> s.classList.toggle('active', s.id==='sec-'+id));
+}
+
+function buildCard(item, uid){
+  const card = document.createElement('div');
+  card.className='card';
+
+  const hasSizes = !!item.sizes;
+  let selectedSize = hasSizes ? item.sizes[0] : null;
+
+  const photo = item.img ? `<div class="imgwrap"><img src="${item.img}" alt="${item.name}" loading="lazy"></div>` : `<div class="imgwrap no-photo"><span>${item.name}</span></div>`;
+  card.innerHTML = `
+    ${photo}
+    <h3>${item.name}</h3>
+    <div class="desc">${item.desc||''}</div>
+    ${hasSizes ? `<div class="size-row">${item.sizes.map((s,i)=>`<button type="button" class="size-btn${i===0?' active':''}" data-idx="${i}"><b>${s.label}</b><span>${fmt(s.price)}</span></button>`).join('')}</div>` : ''}
+    <div class="card-footer">
+      <div class="price" id="price-${uid}"></div>
+      <button class="add-btn" id="add-${uid}">+ Qo'shish</button>
+    </div>
+  `;
+
+  const priceEl = card.querySelector('#price-'+uid);
+  function updatePrice(){
+    const p = hasSizes ? selectedSize.price : item.price;
+    priceEl.innerHTML = (item.oldPrice ? `<span class="old-price">${fmt(item.oldPrice)}</span>` : '') + fmt(p);
+  }
+  updatePrice();
+
+  if(hasSizes){
+    card.querySelectorAll('.size-btn').forEach(btn=>{
+      btn.onclick = ()=>{
+        card.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedSize = item.sizes[+btn.dataset.idx];
+        updatePrice();
+      };
+    });
+  }
+
+  const addBtn = card.querySelector('#add-'+uid);
+  addBtn.onclick = ()=>{
+    const size = hasSizes ? selectedSize.label : null;
+    const price = hasSizes ? selectedSize.price : item.price;
+    const k = keyFor(item.name, size);
+    if(cart[k]) cart[k].qty += 1;
+    else cart[k] = {name:item.name, size, price, qty:1};
+    renderCart();
+    addBtn.classList.add('added');
+    addBtn.textContent = "Qo'shildi ✓";
+    setTimeout(()=>{ addBtn.classList.remove('added'); addBtn.textContent = "+ Qo'shish"; }, 900);
+  };
+
+  return card;
+}
+
+/* ---------------- CART / RECEIPT ---------------- */
+const cartFab = document.getElementById('cartFab');
+const cartBadge = document.getElementById('cartBadge');
+const overlay = document.getElementById('overlay');
+const drawer = document.getElementById('drawer');
+const receiptItems = document.getElementById('receiptItems');
+const totalCount = document.getElementById('totalCount');
+const totalSum = document.getElementById('totalSum');
+
+function openDrawer(){ overlay.classList.add('open'); drawer.classList.add('open'); }
+function closeDrawer(){ overlay.classList.remove('open'); drawer.classList.remove('open'); }
+cartFab.onclick = openDrawer;
+overlay.onclick = closeDrawer;
+document.getElementById('closeDrawer').onclick = closeDrawer;
+
+function renderCart(){
+  const entries = Object.entries(cart);
+  let totalQty = 0, totalPrice = 0;
+  receiptItems.innerHTML = '';
+  if(entries.length===0){
+    receiptItems.innerHTML = '<div class="empty-msg">Savat bo\'sh.<br>Menyudan taom tanlang.</div>';
+  } else {
+    entries.forEach(([k,v])=>{
+      totalQty += v.qty;
+      totalPrice += v.qty * v.price;
+      const row = document.createElement('div');
+      row.className='r-item';
+      row.innerHTML = `
+        <div class="name">${v.name}${v.size?`<span class="tag">${v.size}</span>`:''}</div>
+        <div class="qty-ctl">
+          <button data-act="minus">−</button>
+          <span>${v.qty}</span>
+          <button data-act="plus">+</button>
+        </div>
+        <div style="min-width:78px;text-align:right;">${fmt(v.qty*v.price)}</div>
+      `;
+      row.querySelector('[data-act="minus"]').onclick = ()=>{
+        v.qty -= 1;
+        if(v.qty<=0) delete cart[k];
+        renderCart();
+      };
+      row.querySelector('[data-act="plus"]').onclick = ()=>{
+        v.qty += 1;
+        renderCart();
+      };
+      receiptItems.appendChild(row);
+    });
+  }
+  totalCount.textContent = totalQty;
+  totalSum.textContent = fmt(totalPrice);
+  cartBadge.textContent = totalQty;
+}
+
+document.getElementById('checkoutBtn').onclick = ()=>{
+  const entries = Object.entries(cart);
+  if(entries.length===0){ alert("Savat bo'sh. Avval taom tanlang."); return; }
+  const lines = entries.map(([k,v])=> `${v.name}${v.size?' ('+v.size+')':''} x${v.qty} — ${fmt(v.qty*v.price)}`).join('%0A');
+  const total = entries.reduce((s,[,v])=> s+v.qty*v.price, 0);
+  const msg = `Salom! Buyurtma bermoqchiman:%0A${lines}%0A%0AJami: ${fmt(total)}`;
+  window.open(`https://t.me/Nafis_burgerr?text=${msg}`, '_blank');
+};
+
+renderCart();
+</script>
+</body>
+</html>
